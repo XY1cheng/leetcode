@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int reverse(int x) {
+        long ans = 0;
+        bool neg = false;
+        
+        if(x < 0){
+            neg = true;
+            x = abs(x);
+        }
+        while(x > 0){
+            long num = x % 10;
+            ans = num + ans * 10;
+            x = x / 10;
+        }
+        if(neg == true){
+            ans = -1 * ans;
+        }
+        if(ans > INT_MAX){
+            return 0;
+        }
+        else if(ans < INT_MIN){
+            return 0;
+        }
+        return (int)ans;
+    }
+};
