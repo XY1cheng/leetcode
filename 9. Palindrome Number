@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        std::string ins = std::to_string(x);
+        std::string ans = std::string(ins.rbegin(),ins.rend());
+        if(ins.compare(ans) == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+        return 0;
+    }
+};
