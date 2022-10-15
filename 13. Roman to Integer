@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        int ans = 0;
+        
+        unordered_map<char,int>cmp;
+        cmp['I'] = 1,cmp['V'] = 5,cmp['X'] = 10,cmp['L'] = 50,cmp['C'] = 100,cmp['D'] = 500,cmp['M'] = 1000;
+        
+        stack<int>sta;
+        
+        for(int i = 0;i < s.length();i++){
+            if(sta.empty()||sta.top() >= cmp[s[i]]){
+                sta.push(cmp[s[i]]);
+            }
+            else{
+                int value = cmp[s[i]] - sta.top();
+                
+                sta.pop();
+                sta.push(value);
+            }
+        }
+        while(!sta.empty()){
+            ans += sta.top();
+            sta.pop();
+        }
+        return ans;
+    }
+};
