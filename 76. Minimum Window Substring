@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char,int> t_map;
+        unordered_map<char,int> s_map;
+        
+        for(auto ch : t){
+            t_map[ch]++;
+        }
+        
+        int left = 0;
+        int min = INT_MAX;
+        int cnt = 0;
+        string ans;
+        
+        for(int i = 0;i < s.length();i++){
+            if(t_map.find(s[i]) != t_map.end()){
+                s_map[s[i]]++;
+                
+                if(s_map[s[i]] <= t_map[s[i]] && s_map[s[i]] >= 1){
+                    cnt++;
+                }
+            }
+            
+            if(cnt >= t.length()){
+                while(t_map.find(s[left]) == t_map.end() || s_map[s[left]] > t_map[s[left]]){
+                    s_map[s[left]]--;
+                    left++;
+                }
+                if((i - left) + 1 < min){
+                    min = (i - left) + 1;
+                    ans = s.substr(left,min);
+                }
+            }
+        }
+        return ans;
+    }
+};
